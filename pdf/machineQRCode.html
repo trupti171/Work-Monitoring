@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .qr-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .qr-code {
+            width: 260px;
+            height: 230px;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px; 
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .qr-code img {
+            width: 150px; 
+            height: 150px; 
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+
+        .comp_empl_id, .u_name {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            overflow: hidden; 
+            white-space: nowrap; 
+            text-overflow: ellipsis;
+            width: 100%; 
+        }
+
+        .comp_empl_id strong, .u_name strong {
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="qr-container">
+        {{#each formattedData}}
+            <div class="qr-code">
+                <img src="{{this.qr_code_path}}" alt="QR Code">
+                <div class="comp_machine_id"><strong>Machine ID:</strong> {{this.comp_machine_id}}</div>
+                <div class="m_name"><strong>Name:</strong> {{this.m_name}}</div>
+            </div>
+        {{/each}}
+    </div>
+</body>
+
+</html>

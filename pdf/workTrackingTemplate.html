@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Order Tracking Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .header img {
+            width: 100px;
+            height: auto;
+        }
+
+        .header-title {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .order_details {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2em;
+            align-items: center;
+        }
+
+        .page-break {
+            page-break-before: always;
+            break-before: always;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="{{logo}}" alt="Company Logo">
+        <h1 class="header-title">{{header}}</h1>
+    </div>
+    <div>
+        <h2>Work Order Details</h2>
+        <div class="order_details">
+            <p><strong>Work Order No:</strong> <strong
+                    style="font-size: 1.3em;">{{workOrderNumber}}-{{wm_workorder_name}}</strong></p>
+            <!-- <p><strong>Work order name:</strong> {{wm_workorder_name}}</p> -->
+            <p><strong>Customer:</strong> {{customerName}}</p>
+            <!-- <p><strong>Quantity:</strong> {{quantity}}</p>
+            <p><strong>Job Completed Quantity:</strong> {{jobCompletedQuantity}}</p> -->
+
+            <!-- <p><strong>Total Hours:</strong> {{totalHours}}</p> -->
+        </div>
+        <div class="order_details">
+            <p><strong>Start Date:</strong> {{startTime}}</p>
+            <p><strong>End Date:</strong> {{endTime}}</p>
+            <p><strong>Total Duration:</strong> {{days}} Days</p>
+        </div>
+    </div>
+    <div>
+        <h2 class="section-title">{{effortByPartNoAndOperation}}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Part No</th>
+                    <th>Operation</th>
+                    <th>Operation Description</th>
+                    <th>Total Quantity</th>
+                    <th>Work Completed Qty</th>
+                    <th>Duration (Minutes)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each effortByPartNoArray}}
+                <tr>
+                    <td>{{this.part_no}}</td>
+                    <td>{{this.operation}}</td>
+                    <td>{{this.operation_description}}</td>
+                    <td>{{this.total_quantity}}</td>
+                    <td>{{this.work_complete_qty}}</td>
+                    <td style="text-align: right;">{{this.duration_minutes}}</td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <td colspan="5"><strong>Total</strong></td>
+                    <td style="text-align: right;"><strong>{{effortByPartNoTotalHrs}} </strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="page-break"></div>
+    <div>
+        <h2 class="section-title">{{effortByMachine}}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Machine Id</th>
+                    <th>Machine Name</th>
+                    <th>Duration (Minutes)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each effortByMachineArray}}
+                <tr>
+                    <td>{{this.comp_machine_id}}</td>
+                    <td>{{this.wm_machine_name}}</td>
+                    <td style="text-align: right;">{{this.duration_minutes}}</td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <td colspan="2"><strong>Total</strong></td>
+                    <td style="text-align: right;"><strong>{{effortByMachineTotalHrs}} </strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <div class="page-break"></div>
+        <h2 class="section-title">{{effortByEmployee}}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Job Role</th>
+                    <th>Duration (Minutes)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each effortByEmployeeArray}}
+                <tr>
+                    <td>{{this.comp_empl_id}}</td>
+                    <td>{{this.wm_user_job_role}}</td>
+                    <td style="text-align: right;">{{this.duration_minutes}}</td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <td colspan="2"><strong>Total</strong></td>
+                    <td style="text-align: right;"><strong>{{effortByEmployeeTotalHrs}}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

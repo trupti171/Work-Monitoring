@@ -1,0 +1,184 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Codes</title>
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .qr-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .qr-code img {
+            max-width: 100%;
+            max-height: 100%;
+        } */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .qr-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .qr-code {
+            width: 150px;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="qr-container">
+        {{#each formattedData}}
+        <div class="qr-code">
+            <img src="{{this.qr_code_path}}" alt="QR Code">
+            <div class="work-task-number">{{this.work_task_number}}</div>
+        </div>
+        {{/each}}
+    </div>
+</body>
+
+</html> -->
+<!-- ======================================================================== -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Codes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            align-items: left;
+            width: 100%;
+        }
+
+        .qr-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        .qr-code {
+            padding: 0.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qr-code img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .qr-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .qr-details div {
+            margin-bottom: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="qr-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Work Task Number</th>
+                    <th>Work Part Name</th>
+                    <th>Customer</th>
+                    <th>Operation</th>
+                    <th>Operation_Description</th>
+                    <th>Total_qty</th>
+                    <th>QR Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each formattedData}}
+                <tr>
+                    <td> {{this.work_task_number}}</td>
+                    <td> {{this.part_name}}</td>
+                    <td> {{this.customer}}</td>
+                    <td> {{this.operation}}</td>
+                    <td> {{this.operation_description}}</td>
+                    <td> {{this.total_qty}}</td>
+                    <td>
+                        <div class="qr-code">
+                            <img src="{{this.qr_code_path}}" alt="QR Code">
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
